@@ -21,7 +21,7 @@ class App extends React.Component {
     moviesFromSearch: [],
     currentMovieId: null,
     activeSearchTerm: '',
-    sorting : 'top_rated',
+    sorting : 'popular',
   };
 
 

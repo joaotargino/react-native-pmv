@@ -13,6 +13,7 @@
     "react": "16.4.1",
     "react-dom": "^16.4.2",
     "react-native": "0.56.0",
+    "react-native-parallax-scroll-view": "^0.21.3",
     "react-navigation": "^2.11.2",
     "styled-components": "^3.4.4"
   },

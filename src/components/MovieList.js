@@ -20,7 +20,7 @@ class MovieList extends React.Component {
     const columns = 2;
     return (
       <View style={styles.list}>
-      {/* <SafeAreaView style={styles.list}> */}
+      <SafeAreaView style={styles.list}>
         <FlatList
           data={createRows(this.props.movies, columns)}
           renderItem={({ item }) => (
@@ -29,7 +29,7 @@ class MovieList extends React.Component {
           keyExtractor={(item, index) => index}
           numColumns={columns}
         />
-        {/* </SafeAreaView> */}
+        </SafeAreaView>
       </View>
     );
 
@@ -46,7 +46,6 @@ const styles = StyleSheet.create({
     item: {
     alignItems: "center",
     justifyContent: 'center',
-    backgroundColor: "#dcda48",
     flexGrow: 1,
     margin: 4,
     padding: 20

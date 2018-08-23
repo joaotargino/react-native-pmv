@@ -36,11 +36,13 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   image: {
-    width: '100%',
-    height: 150,
+    width: 140,
+    height: 200,
     backgroundColor: '#ccc',
   },
   info: {
+    width: 140,
+
     padding: 10,
     backgroundColor: '#fff',
     borderColor: '#bbb',
@@ -48,12 +50,13 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
   },
   title: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 'bold',
     marginBottom: 5,
   },
   footer: {
     flexDirection: 'row',
+    flex: 1, flexWrap: 'wrap',
   },
   releaseDate: {
     flex: 2,
