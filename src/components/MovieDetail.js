@@ -105,15 +105,6 @@ class MovieDetail extends React.Component {
                 <Text>{movie.original_title}</Text>
               </View>
 
-            {/* {movie.user && (
-              <View style={styles.user}>
-                <Image
-                  source={{ uri: movie.poster_path }}
-                  style={styles.poster}
-                />
-                <Text>{movie.user.name}</Text>
-              </View>
-            )} */}
           </View>
           <View style={styles.description}>
             <Text>{movie.overview}</Text>
@@ -144,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 10,
     fontWeight: 'bold',
-    backgroundColor: 'rgba(237, 149, 45, 0.4)',
+    backgroundColor: '#ccc',
   },
   footer: {
     flexDirection: 'row',

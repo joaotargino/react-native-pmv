@@ -26,6 +26,7 @@ class MovieList extends React.Component {
           renderItem={({ item }) => (
             <MovieItem movie={item} onPress={this.props.onItemPress} />
           )}
+          keyExtractor={(item, index) => index}
           numColumns={columns}
         />
         {/* </SafeAreaView> */}

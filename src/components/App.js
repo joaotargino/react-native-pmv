@@ -21,6 +21,7 @@ class App extends React.Component {
     moviesFromSearch: [],
     currentMovieId: null,
     activeSearchTerm: '',
+    sorting : 'top_rated',
   };
 
 
@@ -38,7 +39,7 @@ class App extends React.Component {
   };
   async componentDidMount() {
     this.animateTitle();
-    const movies = await ajax.fetchInitialMovies();
+    const movies = await ajax.fetchInitialMovies(this.state.sorting);
     this.setState({ movies });
   }
   //   searchMovies = async (searchTerm) => {

@@ -1,10 +1,9 @@
 const apiHost = 'https://api.themoviedb.org/3/movie/';
-const sorting = 'popular';
 const apiKey = '?&api_key=8a6b785e39df9857b85f92d59fbb55c3';
 
 
 export default {
-    async fetchInitialMovies() {
+    async fetchInitialMovies(sorting) {
         try {
             const response = await fetch(apiHost + sorting + apiKey);
             const responseJson = await response.json();
