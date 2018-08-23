@@ -109,7 +109,7 @@ class MovieDetail extends React.Component {
           <View style={styles.description}>
             <Text>{movie.overview}</Text>
           </View>
-          <Button title="Watch the trailer!" onPress={this.openMovieUrl} />
+          <Button style={styles.movie} title="Watch the trailer!" onPress={this.openMovieUrl} />
         </ScrollView>
       </View>
     );

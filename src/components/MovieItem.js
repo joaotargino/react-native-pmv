@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   info: {
     width: 140,
 
-    padding: 10,
+    padding: 6,
     backgroundColor: '#fff',
     borderColor: '#bbb',
     borderWidth: 1,
