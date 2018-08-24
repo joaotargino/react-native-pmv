@@ -1,6 +1,6 @@
 const apiHost = 'https://api.themoviedb.org/3/movie/';
 const apiKey = '?&api_key=8a6b785e39df9857b85f92d59fbb55c3';
-
+const videosEndpoint = '/videos';
 
 export default {
     async fetchInitialMovies(sorting) {
@@ -23,9 +23,10 @@ export default {
     },
     async fetchMovieVideos(movieId) {
         try {
-            const response = await fetch(apiHost + movieId + 'videos' + apiKey);
+            const response = await fetch(apiHost + movieId + videosEndpoint + apiKey);
             const responseJson = await response.json();
-            return responseJson;
+            console.log(apiHost + movieId + videosEndpoint + apiKey)
+            return responseJson.results;
         } catch (error) {
             console.error(error);
         }

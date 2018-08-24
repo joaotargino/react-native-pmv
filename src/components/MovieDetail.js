@@ -41,7 +41,7 @@ class MovieDetail extends React.Component {
   });
 
   handleSwipe = (indexDirection) => {
-    if (!this.state.movie.backdrop_path[this.state.imageIndex + indexDirection]) {
+    if (!this.state.movieVideos[this.state.imageIndex + indexDirection]) {
       Animated.spring(this.imageXPos, {
         toValue: 0
       }).start();
@@ -62,20 +62,32 @@ class MovieDetail extends React.Component {
     initialMovieData: PropTypes.object.isRequired,
     onBack: PropTypes.func.isRequired,
   };
-  
+
   state = {
     movie: this.props.initialMovieData,
+    movieVideos: [0],
+    movieMedia: [],
     imageIndex: 0,
   };
   async componentDidMount() {
-    const fullMovie = await ajax.fetchMovieDetail(this.state.movie.id);
+    const fullMovieDetails = await ajax.fetchMovieDetail(this.state.movie.id);
+    const movieDetailVideos = await ajax.fetchMovieVideos(this.state.movie.id);
     this.setState({
-      movie: fullMovie,
+      movie: fullMovieDetails,
+      movieVideos: movieDetailVideos,
+
     });
   }
-  openMovieUrl = () => {
-    Linking.openURL(this.state.movie.title); //TODO link to trailers
+  openMovieUrl = (url) => {
+    console.log(this.state.movie.homepage);
+    Linking.openURL(this.state.movie.homepage);
   };
+
+  openTrailer = () =>{
+    console.log(youtubeURL + this.state.movieVideos[this.state.imageIndex].key);
+    Linking.openURL(youtubeURL + this.state.movieVideos[this.state.imageIndex].key);
+  }
+
   render() {
     const { movie } = this.state;
     return (
@@ -83,13 +95,15 @@ class MovieDetail extends React.Component {
         <TouchableOpacity onPress={this.props.onBack}>
           <Text style={styles.backLink}>Back</Text>
         </TouchableOpacity>
-        <Animated.Image
-          {...this.imagePanResponder.panHandlers}
-          source={{ uri: imageURL + movie.backdrop_path }}
-          style={[{ left: this.imageXPos }, styles.image]}
-        />
-        <View>
-          <Text style={styles.title}>{movie.title}</Text>
+          <Animated.Image
+            {...this.imagePanResponder.panHandlers}
+            source={{ uri: youtubeImageURL + this.state.movieVideos[this.state.imageIndex].key + youtubeImage }} //imageURL + movie.backdrop_path }}
+            style={[{ left: this.imageXPos }, styles.image]}
+
+          />
+        <View style={styles.navBar}>
+          <Text style={styles.leftContainer} >{movie.title}</Text>            
+          <Text style={styles.rightContainer} onPress={this.openTrailer}>{watchText + this.state.movieVideos[this.state.imageIndex].name}</Text>
         </View>
         <ScrollView style={styles.detail}>
           <View style={styles.footer}>
@@ -98,24 +112,30 @@ class MovieDetail extends React.Component {
               <Text style={styles.releaseDate}>{"Release Date: " + movie.release_date}</Text>
             </View>
             <View style={alignItems = 'center'}>
-                <Image
-                  source={{ uri: imageURL + movie.poster_path }}
-                  style={styles.poster}
-                />
-                <Text>{movie.original_title}</Text>
-              </View>
+              <Image
+                source={{ uri: imageURL + movie.poster_path }}
+                style={styles.poster}
+              />
+              <Text>{movie.original_title}</Text>
+            </View>
 
           </View>
           <View style={styles.description}>
             <Text>{movie.overview}</Text>
           </View>
-          <Button style={styles.movie} title="Watch the trailer!" onPress={this.openMovieUrl} />
+            <Button style={styles.movie} title="Visit the homepage!" onPress={this.openMovieUrl}/>
+
         </ScrollView>
       </View>
     );
   }
 }
-const imageURL = "https://image.tmdb.org/t/p/w500/"
+const imageURL = "https://image.tmdb.org/t/p/w500/";
+const youtubeURL = "http://www.youtube.com/watch?v=";
+const youtubeImageURL = "http://img.youtube.com/vi/";
+const youtubeImage = "/0.jpg";
+const watchText = "Watch: ";
+
 
 const styles = StyleSheet.create({
   movie: {
@@ -131,11 +151,26 @@ const styles = StyleSheet.create({
     height: '30%',
     backgroundColor: '#ccc',
   },
-  title: {
-    fontSize: 16,
+
+  navBar: {
     padding: 10,
-    fontWeight: 'bold',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: '#ccc',
+  },
+  leftContainer: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: 'bold',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+  },
+  rightContainer: {
+    flex: 1,
+    fontSize: 12,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   footer: {
     flexDirection: 'row',
