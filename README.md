@@ -1,4 +1,3 @@
-# react-native-pmv # react-native-pmv
 main screen
 
 ![1.jpg](https://udacity-reviews-uploads.s3.us-west-2.amazonaws.com/_attachments/21595/1535137342/1.jpg)
